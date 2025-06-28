@@ -1,3 +1,5 @@
+# YSFOML (Yasir Sultan File Operations Markup Language) Processor , Version 1.0.3 
+
 import os
 import datetime
 import tkinter as tk
@@ -1052,35 +1054,47 @@ class YSFOML_GUI:
     def browse_folder(self):
         folder_selected = filedialog.askdirectory()
         if folder_selected:
-            # Backup the newly selected folder
-            timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            backup_folder_name = f"{os.path.basename(folder_selected)}_backup_{timestamp}"
-            parent_dir = os.path.dirname(folder_selected)
-            backup_path = os.path.join(parent_dir, backup_folder_name)
-
             self.processing_log_text.config(state=tk.NORMAL)
-            self.processing_log_text.insert(tk.END, f"Attempting to backup selected folder '{folder_selected}'...\n")
+            self.processing_log_text.delete("1.0", tk.END) # Clear previous logs
 
-            if os.path.exists(folder_selected) and os.path.isdir(folder_selected):
-                try:
-                    shutil.copytree(folder_selected, backup_path)
-                    self.processing_log_text.insert(tk.END, f"Successfully backed up '{folder_selected}' to '{backup_path}'\n")
-                except FileExistsError:
-                    self.processing_log_text.insert(tk.END, f"Backup folder '{backup_path}' already exists. Skipping backup.\n")
-                except shutil.Error as e:
-                    self.processing_log_text.insert(tk.END, f"Error backing up folder '{folder_selected}': {e}\n")
-                except Exception as e:
-                    self.processing_log_text.insert(tk.END, f"An unexpected error occurred during folder backup: {e}\n")
+            # Ask user if they want to backup the folder
+            backup_confirm = messagebox.askyesno(
+                "Backup Folder Confirmation",
+                f"Do you want to create a backup of the selected folder:\n'{folder_selected}'\nbefore proceeding?"
+            )
+
+            if backup_confirm:
+                timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                # Create a backup folder next to the selected folder, named with original folder name + timestamp
+                backup_folder_name = f"{os.path.basename(folder_selected)}_backup_{timestamp}"
+                parent_dir = os.path.dirname(folder_selected)
+                backup_path = os.path.join(parent_dir, backup_folder_name)
+
+                self.processing_log_text.insert(tk.END, f"Attempting to backup selected folder '{folder_selected}' to '{backup_path}'...\n")
+
+                if os.path.exists(folder_selected) and os.path.isdir(folder_selected):
+                    try:
+                        shutil.copytree(folder_selected, backup_path)
+                        self.processing_log_text.insert(tk.END, f"Successfully backed up '{folder_selected}' to '{backup_path}'\n")
+                    except FileExistsError:
+                        self.processing_log_text.insert(tk.END, f"Backup folder '{backup_path}' already exists. Skipping backup.\n")
+                    except shutil.Error as e:
+                        self.processing_log_text.insert(tk.END, f"Error backing up folder '{folder_selected}': {e}\n")
+                    except Exception as e:
+                        self.processing_log_text.insert(tk.END, f"An unexpected error occurred during folder backup: {e}\n")
+                else:
+                    self.processing_log_text.insert(tk.END, f"Selected path '{folder_selected}' does not exist or is not a directory. No backup performed.\n")
             else:
-                self.processing_log_text.insert(tk.END, f"Selected path '{folder_selected}' does not exist or is not a directory. No backup performed.\n")
-
-            self.processing_log_text.config(state=tk.DISABLED)
+                self.processing_log_text.insert(tk.END, f"Backup of '{folder_selected}' skipped by user.\n")
 
             self.project_folder_name = folder_selected
             self.folder_entry.delete(0, tk.END)
-            self.folder_entry.insert(0, folder_selected)
+            self.folder_entry.insert(0, self.project_folder_name)
             self.log_folder_name = os.path.join(self.project_folder_name, "logs")
             os.makedirs(self.log_folder_name, exist_ok=True)
+            self.processing_log_text.insert(tk.END, f"Project folder set to: '{self.project_folder_name}'\n")
+
+            self.processing_log_text.config(state=tk.DISABLED)
 
 
     def process_content(self):
