@@ -1,35 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YSFOML (Yasir Sultan File Operations Markup Language) Specification Version 1.0.0</title>
+    <title>YSFOML (Yasir Sultan File Operations Markup Language) Specification and Documentation, Version 1.0.3</title>
     <style>
-        /* Dark Theme Styles */
+        /* General Body Styling (from 60b.html, adjusted for dark theme) */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #222222;
-            color: #EEEEEE;
             line-height: 1.6;
             margin: 0;
-            padding: 0;
+            padding: 0; /* Adjusted for container margin */
+            background-color: #222222; /* Dark background */
+            color: #EEEEEE; /* Light text */
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
         }
 
+        /* Main Container for the Page (combined from both) */
         .container {
             max-width: 900px;
             width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            background-color: #2D2D2D;
+            margin: 20px auto; /* Adjusted for vertical margin */
+            background: #2D2D2D; /* Darker background for container */
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin: 20px 0; /* Add some vertical margin */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adjusted shadow for dark theme */
+            box-sizing: border-box; /* Ensure padding is included in width */
         }
 
+        /* Headings (combined from both) */
         h1, h2, h3, h4, h5, h6 {
             color: #87CEEB; /* Sky Blue for headings */
             margin-top: 1.5em;
@@ -41,6 +42,7 @@
             border-bottom: 2px solid #87CEEB;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            text-align: center; /* From 60b.html */
         }
 
         h2 {
@@ -48,13 +50,123 @@
             border-bottom: 1px solid #87CEEB;
             padding-bottom: 5px;
             margin-bottom: 15px;
+            text-align: center; /* From 60b.html */
         }
 
         h3 {
             font-size: 1.5em;
             color: #ADD8E6; /* Light Blue */
+            text-align: left; /* From 60b.html */
+            margin-top: 40px; /* From 60b.html */
+            margin-bottom: 15px; /* From 60b.html */
         }
 
+        /* Styling for general content sections (from 60b.html) */
+        .content-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #555555; /* Adjusted for dark theme */
+            border-radius: 8px;
+            background-color: #3A3A3A; /* Adjusted for dark theme */
+        }
+
+        .content-section p {
+            margin-bottom: 10px;
+        }
+
+        .content-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .content-section li {
+            margin-bottom: 5px;
+        }
+
+        /* Styling for each Chat Section (from 60b.html) */
+        .chat-section {
+            margin-bottom: 40px;
+            border: 1px solid #555555; /* Adjusted for dark theme */
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #3A3A3A; /* Adjusted for dark theme */
+        }
+
+        /* Styling for individual messages (from 60b.html) */
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            word-wrap: break-word; /* Ensures long words break and wrap */
+        }
+
+        /* User Message Specific Styling (from 60b.html) */
+        .user-message {
+            background-color: #444444; /* Darker grey */
+            border-left: 5px solid #ADD8E6; /* Light blue border */
+            margin-right: 15%; /* Indent from right */
+        }
+
+        /* AI Message Specific Styling (from 60b.html) */
+        .ai-message {
+            background-color: #333333; /* Even darker grey */
+            border-left: 5px solid #90EE90; /* Light green border */
+            margin-left: 15%; /* Indent from left */
+        }
+
+        /* Label for User/AI in messages (from 60b.html) */
+        .message-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #EEEEEE; /* Adjusted for dark theme */
+        }
+
+        /* Styling for YSFOML Code Blocks (combined from both) */
+        .ysfoml-code-block {
+            background-color: #1E1E1E; /* Dark background for code */
+            color: #D4D4D4; /* Light text for code */
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Enable horizontal scrolling for long lines */
+            margin-top: 10px;
+            font-family: 'Consolas', 'Monaco', monospace; /* From 60.html */
+            font-size: 0.9em;
+            position: relative; /* For positioning the YSFOML label */
+        }
+
+        /* Label for YSFOML Code Blocks (from 60b.html) */
+        .ysfoml-code-label {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background-color: #87CEEB; /* Sky Blue label background */
+            color: black; /* Changed to black for contrast */
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Preformatted text within code blocks (combined from both) */
+        pre {
+            margin: 0;
+            white-space: pre-wrap; /* Ensures long lines wrap */
+            word-wrap: break-word; /* Ensures long words break */
+        }
+
+        /* Code element within pre (from 60b.html) */
+        pre code {
+            display: block; /* Make code block fill pre */
+            background-color: transparent; /* From 60.html */
+            padding: 0; /* From 60.html */
+            border-radius: 0; /* From 60.html */
+            color: inherit; /* From 60.html */
+        }
+
+        /* General elements from 60.html */
         a {
             color: #ADD8E6;
             text-decoration: none;
@@ -70,22 +182,6 @@
             padding: 2px 4px;
             border-radius: 4px;
             color: #FFD700; /* Gold for inline code */
-        }
-
-        pre {
-            background-color: #1E1E1E;
-            color: #D4D4D4;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            margin-bottom: 1em;
-        }
-
-        pre code {
-            background-color: transparent;
-            padding: 0;
-            border-radius: 0;
-            color: inherit;
         }
 
         ul {
@@ -119,11 +215,15 @@
             color: #ADD8E6;
         }
 
-        /* Responsive adjustments */
+        /* Responsive adjustments for smaller screens (combined from both) */
         @media (max-width: 768px) {
+            .user-message, .ai-message {
+                margin-left: 0; /* Remove indentation */
+                margin-right: 0; /* Remove indentation */
+            }
             .container {
-                padding: 15px;
-                margin: 10px 0;
+                padding: 15px; /* Reduce padding on container */
+                margin: 10px 0; /* Adjusted vertical margin */
             }
             h1 { font-size: 2em; }
             h2 { font-size: 1.7em; }
@@ -145,24 +245,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>YSFOML (Yasir Sultan File Operations Markup Language) Specification and Documentation , Version 1.0.0</h1>
+        <h1>YSFOML (Yasir Sultan File Operations Markup Language) Specification and Documentation, Version 1.0.3</h1>
 
         <h2>1. Introduction</h2>
-        <p>YSFOML (Yasir Sultan File Operations Markup Language) is a simple, human-readable markup language designed for defining and executing a series of file system operations. It allows users to specify actions such as creating, appending, deleting, renaming, moving files and folders, as well as performing content-based operations like searching, replacing, and reading file contents. YSFOML is processed by a dedicated parser application that interprets the defined actions and executes them on the local file system.</p>
-        <p>YSFOML is free to use, and you are encouraged to create applications that utilize it. When doing so, please ensure that "YSFOML (Yasir Sultan File Operations Markup Language)" is mentioned without alteration.</p>
+        <p>YSFOML (Yasir Sultan File Operations Markup Language) is a simple, human-readable markup language designed to define and execute file system operations. It provides a structured way to specify actions like creating, modifying, querying, and managing files and folders. YSFOML is particularly useful for enabling Artificial Intelligence (AI) to interact with file systems in a controlled and auditable manner, always with a critical human review step. It is processed by a dedicated parser application that interprets the defined actions and executes them on the local file system.</p>
 
         <h2>2. Core Concepts</h2>
 
         <h3>2.1 YSFOML Block Structure</h3>
         <p>YSFOML operations are defined within <code>&lt;YSFOML&gt;</code> and <code>&lt;/YSFOML&gt;</code> tags. Each block represents a single file system operation.</p>
         <p><strong>Syntax:</strong></p>
-        <pre><code>&lt;YSFOML&gt;
+        <div class="ysfoml-code-block">
+            <span class="ysfoml-code-label">YSFOML</span>
+            <pre><code>&lt;YSFOML&gt;
 action: [action_name];
 [parameter1]:[value1];
 [parameter2]:[value2]
 ...
 &lt;/YSFOML&gt;
 [Optional Content associated with the action]</code></pre>
+        </div>
         <ul>
             <li><strong><code>&lt;YSFOML&gt;</code> and <code>&lt;/YSFOML&gt;</code>:</strong> These tags delimit an YSFOML instruction block.</li>
             <li><strong>Instructions:</strong> Inside the tags, instructions are provided as <code>key:value;</code> pairs, with each instruction typically ending with a semicolon. The <code>action</code> key is mandatory and specifies the operation to be performed.</li>
@@ -193,13 +295,16 @@ action: [action_name];
         <h3>2.5 User-Defined Actions (<code>actionSource: userAdded</code>)</h3>
         <p>While YSFOML provides a comprehensive set of built-in actions, future versions may allow for the definition of new, custom actions. If you are defining a new action that is not part of the standard YSFOML specification, you *must* include the <code>actionSource: userAdded;</code> parameter within the YSFOML block. This parameter signals to the parser that the action is a custom, user-defined one. Current YSFOML processors may log these actions as unsupported, but this mechanism is in place for future extensibility.</p>
         <p><strong>Example for a hypothetical user-added action:</strong></p>
-        <pre><code>&lt;YSFOML&gt;
+        <div class="ysfoml-code-block">
+            <span class="ysfoml-code-label">YSFOML</span>
+            <pre><code>&lt;YSFOML&gt;
 action:myCustomAction;
 actionSource:userAdded;
 param1:value1;
 param2:value2
 &lt;/YSFOML&gt;
 This is content for my custom action.</code></pre>
+        </div>
 
         <h2>3. Language Specification (Detailed Action Reference)</h2>
         <p>This section details each supported YSFOML action, its purpose, parameters, content usage, and behavior.</p>
@@ -221,13 +326,16 @@ This is content for my custom action.</code></pre>
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:create;
 filename:file1.txt
 &lt;/YSFOML&gt;
 hey,
 this is the first file1
 by Yasir Sultan</code></pre>
+                </div>
             </li>
         </ul>
 
@@ -248,7 +356,9 @@ by Yasir Sultan</code></pre>
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:append;
 filename:file2.txt
 &lt;/YSFOML&gt;
@@ -258,6 +368,7 @@ hey,
 this is the second file
 developed by Yasir Sultan
 -- Appended content --</code></pre>
+                </div>
             </li>
         </ul>
 
@@ -277,10 +388,13 @@ developed by Yasir Sultan
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:delete;
 filename:renamed_file1.txt
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
 
@@ -301,21 +415,24 @@ filename:renamed_file1.txt
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:createFolder;
 foldername:my_new_folder
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
 
         <h3>3.5 <code>action:deleteFolder</code></h3>
         <ul>
             <li><strong>Purpose:</strong> Deletes a specified directory and all its contents (files and subfolders).</li>
-            <li><strong>Parameters:</b>
+            <li><strong>Parameters:
                 <ul>
                     <li><code>foldername</code>: (Required, String) The path and name of the folder to delete, relative to the base folder.</li>
                 </ul>
-            </li>
+            </strong></li><strong>
             <li><strong>Security Level:</strong> <code>high</code></li>
             <li><strong>Content:</strong> Not used.</li>
             <li><strong>Behavior:</strong>
@@ -325,12 +442,15 @@ foldername:my_new_folder
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:deleteFolder;
 foldername:my_new_folder
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
-        </ul>
+        </strong></ul><strong>
 
         <h3>3.6 <code>action:rename</code></h3>
         <ul>
@@ -351,11 +471,14 @@ foldername:my_new_folder
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:rename;
 filename:file1.txt;
 filename2:renamed_file1.txt
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
 
@@ -378,22 +501,25 @@ filename2:renamed_file1.txt
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:move;
 filepath1:file2.txt;
 filepath2:my_new_folder/moved_file2.txt
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
 
         <h3>3.8 <code>action:treeFolders</code></h3>
         <ul>
             <li><strong>Purpose:</strong> Displays the directory structure (folders only) starting from a specified folder.</li>
-            <li><strong>Parameters:</strong>
+            <li><strong>Parameters:
                 <ul>
                     <li><code>foldername</code>: (Optional, String) The folder from which to start the tree display, relative to the base folder. If omitted, the base folder itself is used.</li>
                 </ul>
-            </li>
+            </strong></li><strong>
             <li><strong>Security Level:</strong> <code>low</code></li>
             <li><strong>Content:</strong> Not used.</li>
             <li><strong>Behavior:</strong>
@@ -403,12 +529,15 @@ filepath2:my_new_folder/moved_file2.txt
                 </ul>
             </li>
             <li><strong>Example::</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:treeFolders;
 foldername:my_new_folder
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
-        </ul>
+        </strong></ul><strong>
 
         <h3>3.9 <code>action:treeFiles</code></h3>
         <ul>
@@ -420,18 +549,21 @@ foldername:my_new_folder
             </li>
             <li><strong>Security Level:</strong> <code>low</code></li>
             <li><strong>Content:</strong> Not used.</li>
-            <li><strong>Behavior:</strong>
+            <li><strong>Behavior:
                 <ul>
                     <li>Outputs the full file and folder tree to the "Operation Results" panel.</li>
                 </ul>
-            </li>
+            </strong></li><strong>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:treeFiles;
 foldername:
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
-        </ul>
+        </strong></ul><strong>
 
         <h3>3.10 <code>action:findFile</code></h3>
         <ul>
@@ -450,11 +582,14 @@ foldername:
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:findFile;
 filename:renamed_file1.txt;
 foldername:
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
 
@@ -469,19 +604,22 @@ foldername:
             </li>
             <li><strong>Security Level:</strong> <code>low</code></li>
             <li><strong>Content:</strong> Not used.</li>
-            <li><strong>Behavior:</strong>
+            <li><strong>Behavior:
                 <ul>
                     <li>Outputs the line number and column number for each occurrence of the <code>searchString</code> to the "Operation Results" panel.</li>
                 </ul>
-            </li>
+            </strong></li><strong>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:findInFile;
 filename:daily_report.txt;
 searchString:sales
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
-        </ul>
+        </strong></ul><strong>
 
         <h3>3.12 <code>action:replaceInFile</code></h3>
         <ul>
@@ -502,12 +640,15 @@ searchString:sales
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:replaceInFile;
 filename:daily_report.txt;
 searchString:$;
 newString:USD
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
 
@@ -527,23 +668,26 @@ newString:USD
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:readFileAll;
 filename:daily_report.txt
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
 
         <h3>3.14 <code>action:readFileLines</code></h3>
         <ul>
             <li><strong>Purpose:</strong> Reads and displays specific lines from a file.</li>
-            <li><strong>Parameters:</strong>
+            <li><strong>Parameters:
                 <ul>
                     <li><code>filename</code>: (Required, String) The path and name of the file to read, relative to the base folder.</li>
                     <li><code>startLine</code>: (Optional, Integer) The starting line number (1-indexed). Defaults to 1.</li>
                     <li><code>endLine</code>: (Optional, Integer) The ending line number (1-indexed). Defaults to the last line of the file if omitted or set to -1.</li>
                 </ul>
-            </li>
+            </strong></li><strong>
             <li><strong>Security Level:</strong> <code>low</code></li>
             <li><strong>Content:</strong> Not used.</li>
             <li><strong>Behavior:</strong>
@@ -553,14 +697,17 @@ filename:daily_report.txt
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:readFileLines;
 filename:daily_report.txt;
 startLine:2;
 endLine:3
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
-        </ul>
+        </strong></ul><strong>
 
         <h3>3.15 <code>action:insertAt</code></h3>
         <ul>
@@ -574,32 +721,35 @@ endLine:3
             </li>
             <li><strong>Security Level:</strong> <code>medium</code></li>
             <li><strong>Content:</strong> The text content to insert into the file.</li>
-            <li><strong>Behavior:</strong>
+            <li><strong>Behavior:
                 <ul>
                     <li>A copy of the original file (with a timestamp) is created as a backup before modification.</li>
                     <li>If <code>lineNum</code> is out of bounds, an error is logged.</li>
                     <li>If <code>colNum</code> is greater than the length of the line, the text is appended to the end of that line.</li>
                 </ul>
-            </li>
+            </strong></li><strong>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:insertAt;
 filename:daily_report.txt;
 lineNum:1;
 colNum:1
 &lt;/YSFOML&gt;
 --- START OF REPORT ---</code></pre>
+                </div>
             </li>
-        </ul>
+        </strong></ul><strong>
 
         <h3>3.16 <code>action:treeFoldersJSON</code></h3>
         <ul>
             <li><strong>Purpose:</strong> Generates a machine-readable JSON representation of the directory structure (folders only) starting from a specified folder. This action is primarily intended for AI models to programmatically understand the project's folder layout.</li>
-            <li><strong>Parameters:</strong>
+            <li><strong>Parameters:
                 <ul>
                     <li><code>foldername</code>: (Optional, String) The folder from which to start the tree generation, relative to the base folder. If omitted, the base folder itself is used.</li>
                 </ul>
-            </li>
+            </strong></li><strong>
             <li><strong>Security Level:</strong> <code>low</code></li>
             <li><strong>Content:</strong> Not used.</li>
             <li><strong>Behavior:</strong>
@@ -610,12 +760,15 @@ colNum:1
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:treeFoldersJSON;
 foldername:my_new_folder
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
-        </ul>
+        </strong></ul><strong>
 
         <h3>3.17 <code>action:treeFilesJSON</code></h3>
         <ul>
@@ -634,98 +787,15 @@ foldername:my_new_folder
                 </ul>
             </li>
             <li><strong>Example:</strong>
-                <pre><code>&lt;YSFOML&gt;
+                <div class="ysfoml-code-block">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
 action:treeFilesJSON;
 foldername:
 &lt;/YSFOML&gt;</code></pre>
+                </div>
             </li>
         </ul>
-
-        
-        <h2>4. Using the YSFOML Parser Application</h2>
-        <p>The provided Python script <code>YSFOML_GUI</code> acts as a parser and executor for YSFOML documents.</p>
-
-        <h3>4.1 Requirements</h3>
-        <ul>
-            <li>Python 3.x</li>
-            <li><code>tkinter</code> (usually included with Python)</li>
-            <li><code>requests</code> library (<code>pip install requests</code>)</li>
-            <li>For <code>action:json</code> with <code>jsonPath</code>, a JSONPath library might be required (e.g., <code>pip install jsonpath-ng</code>).</li>
-        </ul>
-
-        <h3>4.2 Running the Application</h3>
-        <ol>
-            <li>Save the provided Python code as a <code>.py</code> file (e.g., <code>ysfoml_parser.py</code>).</li>
-            <li>Run it from your terminal: <code>python ysfoml_parser.py</code></li>
-        </ol>
-
-        <h3>4.3 Application Interface</h3>
-        <p>The GUI provides the following main components:</p>
-        <ul>
-            <li><strong>YSFOML Input:</strong> A text area where you paste or type your YSFOML document.</li>
-            <li><strong>Project Folder:</strong> An entry field and a "Browse" button to select the base directory where all file operations will be performed. By default, it creates an <code>YSFOML_output</code> folder in the current working directory.</li>
-            <li><strong>Process YSFOML Button:</strong> Initiates the parsing and execution of the YSFOML content.</li>
-            <li><strong>Processing Logs:</strong> Displays detailed logs of each step, including warnings, errors, and success messages for file operations.</li>
-            <li><strong>Operation Results:</strong> Displays the output of query-based operations like <code>treeFolders</code>, <code>findFile</code>, <code>readFileAll</code>, etc.</li>
-            <li><strong>Security Level Dropdown:</strong> Allows the user to select a security level (low, medium, high, extremelyHigh) that will restrict which YSFOML actions can be executed.</li>
-        </ul>
-
-        <h3>4.4 Workflow</h3>
-        <ol>
-            <li><strong>Prepare YSFOML:</strong> Write or paste your YSFOML instructions into the "YSFOML Input" text area.</li>
-            <li><strong>Select Base Folder:</strong> Choose or confirm the "Project Folder" where the operations will take place.</li>
-            <li><strong>Select Security Level:</strong> Choose the appropriate security level from the dropdown. Operations requiring a higher security level than selected will be blocked.</li>
-            <li><strong>Process:</strong> Click "Process YSFOML".</li>
-            <li><strong>Review Output:</strong> Check the "Processing Logs" for the status of each operation and the "Operation Results" for the output of query actions.</li>
-            <li><strong>Check File System:</strong> Verify the changes in your chosen "Project Folder".</li>
-        </ol>
-
-        <h3>4.5 Logging</h3>
-        <p>The parser automatically saves three log files for each processing run within a <code>logs</code> subfolder inside your chosen project folder:</p>
-        <ul>
-            <li><code>input_[timestamp].txt</code>: A copy of the YSFOML content that was processed.</li>
-            <li><code>processing_log_[timestamp].txt</code>: The full content of the "Processing Logs" panel.</li>
-            <li><code>results_log_[timestamp].txt</code>: The full content of the "Operation Results" panel.</li>
-        </ul>
-
-        <h2>5. Error Handling and Best Practices</h2>
-
-        <h3>5.1 Error Handling</h3>
-        <ul>
-            <li>The parser attempts to log descriptive error messages to the "Processing Logs" panel for failed operations (e.g., file not found, permission errors, invalid parameters).</li>
-            <li>Syntax errors within the <code>key:value;</code> pairs might lead to parameters not being correctly parsed, resulting in "Warning: No 'key' found" messages.</li>
-            <li>Missing closing <code>&lt;/YSFOML&gt;</code> tags will result in warnings and incomplete parsing.</li>
-            <li>For critical errors (e.g., missing Python libraries), a <code>tkinter.messagebox</code> will appear.</li>
-            <li>Operations that fail due to insufficient security levels will be logged and prevented from executing.</li>
-        </ul>
-
-        <h3>5.2 Backup Mechanism</h3>
-        <ul>
-            <li>For <code>create</code>, <code>append</code>, <code>replaceInFile</code>, and <code>action:json</code> (write mode) operations, the parser creates a timestamped backup of the original file before modification. This is a crucial safety feature to prevent accidental data loss. Backups are stored in the same directory as the original file.</li>
-        </ul>
-
-        <h3>5.3 Best Practices</h3>
-        <ul>
-            <li><strong>Test on Dummy Data:</strong> Always test your YSFOML scripts on a non-critical "Project Folder" or with dummy files first, especially for destructive operations like <code>delete</code> or <code>deleteFolder</code>.</li>
-            <li><strong>Clear Paths:</strong> Use clear and consistent relative paths for filenames and foldernames.</li>
-            <li><strong>Review Logs:</strong> Always review the "Processing Logs" after execution to ensure all operations completed as expected and to identify any warnings or errors.</li>
-            <li><strong>One Action Per Block:</strong> Adhere to the "one action per YSFOML block" principle for clarity and proper parsing.</li>
-            <li><strong>Semicolons:</strong> Remember to end each parameter definition with a semicolon.</li>
-            <li><strong>Content Placement:</strong> Ensure the content associated with an action immediately follows its <code>&lt;/YSFOML&gt;</code> tag.</li>
-        </ul>
-
-        <h2>6. Limitations</h2>
-        <ul>
-            <li><strong>No Conditional Logic:</strong> YSFOML currently does not support conditional statements (if/else) or loops. Operations are executed sequentially as they appear in the document.</li>
-            <li><strong>No Variables:</strong> There is no support for defining and using variables within YSFOML.</li>
-            <li><strong>No External Scripting:</strong> YSFOML cannot directly execute external scripts or commands.</li>
-            <li><strong>Single File Processing:</strong> The parser processes the entire input as a single YSFOML document.</li>
-            <li><strong>Platform Dependent Paths:</strong> While <code>os.path.join</code> is used for path construction, complex path manipulations or platform-specific characters might behave unexpectedly.</li>
-            <li><strong>No Undo Feature:</strong> Operations are permanent on the file system (except for the automatic backups for certain actions). There is no built-in "undo" functionality for the sequence of operations.</li>
-        </ul>
-
-        <h2>7. Disclaimer</h2>
-        <p>YSFOML (Yasir Sultan File Operations Markup Language) and the YSFOML Processor application are currently under development. They are provided "as is" without warranty of any kind, either express or implied. Use at your own risk. The developer is not responsible for any data loss or other damages incurred from the use of this software.</p>
 
         <h2>8. YSFOML and Artificial Intelligence</h2>
         <p>YSFOML is designed with Artificial Intelligence (AI) interaction in mind, serving as a structured and human-readable language for AI models to specify file system operations. This allows AI to communicate desired file manipulations in a clear, auditable format.</p>
@@ -741,6 +811,456 @@ foldername:
             <li><strong>Generating Modification Instructions:</strong> With a clear understanding of the project structure and file contents, the AI can then generate precise YSFOML instructions for operations like <code>action:create</code>, <code>action:append</code>, <code>action:replaceInFile</code>, or <code>action:insertAt</code> to make the desired changes. This iterative process of "read-then-write" ensures that AI-generated modifications are contextually aware and accurate.</li>
         </ul>
         <p>This structured approach allows the AI to provide more intelligent and targeted assistance, while the human-in-the-loop model ensures safety and oversight.</p>
+
+        <h3>8.2 Key AI Interaction Capabilities</h3>
+        <p>YSFOML offers several powerful and secure ways for Artificial Intelligence (AI) to interact with file systems:</p>
+        <ul>
+            <li><strong>AI-Driven File Generation and Creation:</strong> AI can generate YSFOML instructions to create new files, such as source code, configuration files, or documentation, based on user requirements.</li>
+            <li><strong>AI-Assisted File Modification:</strong> AI can generate YSFOML to perform operations that modify existing files, including appending content, inserting content at specific locations, or replacing text within files. This allows AI to "edit" files in a structured and auditable manner.</li>
+            <li><strong>AI-Powered Project Structure Understanding:</strong> YSFOML provides specific actions that allow AI models to programmatically obtain a machine-readable JSON representation of a project's directory and file structure. This is crucial for AI to gain context and understand the layout of a project before suggesting or performing operations.</li>
+            <li><strong>AI-Guided File System Querying and Analysis:</strong> AI can use YSFOML's read-only operations to analyze file content and structure. This includes searching for specific files, finding strings within files, or reading entire file contents or specific lines. This enables AI to perform detailed analysis and retrieve necessary information from the file system.</li>
+            <li><strong>Human-in-the-Loop Automation and Security:</strong> A core principle highlighted is the "human-in-the-loop" security model. While AI can generate complex YSFOML instructions, the execution is intentionally manual. The user reviews the AI-generated YSFOML before processing it with the YSFOML Parser. This ensures that users maintain ultimate control and oversight over their local file system, especially for operations with medium or high security levels that can modify or delete files.</li>
+        </ul>
+        <p>In summary, YSFOML serves as a structured, human-readable interface that allows AI to understand, query, and propose modifications to file systems, while ensuring a critical human review step for security and control.</p>
+
+        <h3>8.3 Examples of YSFOML Instructions for AI Usage Scenarios</h3>
+        <div class="content-section">
+            <h4>1. AI-Driven File Generation and Creation</h4>
+            <p>An AI is asked to create a new Python script for a simple "Hello World" program.</p>
+            <div class="ysfoml-code-block">
+                <span class="ysfoml-code-label">YSFOML</span>
+                <pre><code>&lt;YSFOML&gt;
+action:create;
+filename:hello_world.py
+&lt;/YSFOML&gt;
+print("Hello, YSFOML World!")</code></pre>
+            </div>
+
+            <h4>2. AI-Assisted File Modification</h4>
+            <h5>Scenario A: Appending content to an existing file.</h5>
+            <p>An AI needs to add a new log entry to an existing <code>application.log</code> file.</p>
+            <div class="ysfoml-code-block">
+                <span class="ysfoml-code-label">YSFOML</span>
+                <pre><code>&lt;YSFOML&gt;
+action:append;
+filename:application.log
+&lt;/YSFOML&gt;
+[2025-06-28 15:30:00] INFO: User 'admin' logged in successfully.</code></pre>
+            </div>
+
+            <h5>Scenario B: Replacing content within a file.</h5>
+            <p>An AI identifies a placeholder in a configuration file and needs to replace it with an actual value.</p>
+            <div class="ysfoml-code-block">
+                <span class="ysfoml-code-label">YSFOML</span>
+                <pre><code>&lt;YSFOML&gt;
+action:replaceInFile;
+filename:config.ini;
+searchString:DB_PASSWORD=YOUR_PASSWORD;
+newString:DB_PASSWORD=secure_ai_pass123;
+&lt;/YSFOML&gt;</code></pre>
+            </div>
+
+            <h5>Scenario C: Inserting content at a specific position in a file.</h5>
+            <p>An AI needs to add a new function definition at the beginning of a Python script.</p>
+            <div class="ysfoml-code-block">
+                <span class="ysfoml-code-label">YSFOML</span>
+                <pre><code>&lt;YSFOML&gt;
+action:insertAt;
+filename:my_utility.py;
+lineNum:1;
+colNum:1
+&lt;/YSFOML&gt;
+def calculate_sum(a, b):
+    return a + b
+
+</code></pre>
+            </div>
+
+            <h4>3. AI-Powered Project Structure Understanding</h4>
+            <h5>Scenario A: Getting a JSON representation of folder structure.</h5>
+            <p>An AI needs a high-level overview of the project's directories to understand its organization.</p>
+            <div class="ysfoml-code-block">
+                <span class="ysfoml-code-label">YSFOML</span>
+                <pre><code>&lt;YSFOML&gt;
+action:treeFoldersJSON;
+foldername:src/components;
+&lt;/YSFOML&gt;</code></pre>
+            </div>
+
+            <h5>Scenario B: Getting a JSON representation of the full file and folder structure.</h5>
+            <p>An AI needs a detailed map of all files and folders within a specific directory to plan modifications.</p>
+            <div class="ysfoml-code-block">
+                <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
+action:treeFilesJSON;
+foldername:public/assets;
+&lt;/YSFOML&gt;</code></pre>
+                </div>
+            
+        
+
+        <h3>4. AI-Guided File System Querying and Analysis</h3>
+        <h5>Scenario A: Reading the entire content of a file.</h5>
+        <p>An AI needs to analyze the content of a specific source code file.</p>
+        <div class="ysfoml-code-block">
+            <span class="ysfoml-code-label">YSFOML</span>
+            <pre><code>&lt;YSFOML&gt;
+action:readFileAll;
+filename:src/main.js
+&lt;/YSFOML&gt;</code></pre>
+        </div>
+
+        <h5>Scenario B: Searching for a string within a file.</h5>
+        <p>An AI is looking for all occurrences of a specific variable name (<code>user_id</code>) in a database script.</p>
+        <div class="ysfoml-code-block">
+            <span class="ysfoml-code-label">YSFOML</span>
+            <pre><code>&lt;YSFOML&gt;
+action:findInFile;
+filename:database/schema.sql;
+searchString:user_id;
+&lt;/YSFOML&gt;</code></pre>
+        </div>
+
+        <h5>Scenario C: Searching for a specific file.</h5>
+        <p>An AI needs to locate all instances of <code>config.json</code> across the project.</p>
+        <div class="ysfoml-code-block">
+            <span class="ysfoml-code-label">YSFOML</span>
+            <pre><code>&lt;YSFOML&gt;
+action:findFile;
+filename:config.json;
+foldername:;
+&lt;/YSFOML&gt;</code></pre>
+        </div>
+
+        <h3>5. Human-in-the-Loop Automation and Security</h3>
+        <p>This scenario is represented by the overall workflow and the use of security levels. An AI would <em>generate</em> one of the YSFOML blocks, and a human user would then <em>review</em> it before feeding it into the YSFOML Parser application. For instance, a <code>deleteFolder</code> instruction has a <code>high</code> security level, requiring careful human review.</p>
+        <div class="ysfoml-code-block">
+            <span class="ysfoml-code-label">YSFOML</span>
+            <pre><code>&lt;YSFOML&gt;
+action:deleteFolder;
+foldername:old_backup_data;
+&lt;/YSFOML&gt;</code></pre>
+        </div>
     </div>
-</body>
-</html>
+
+        <h2>9. AI Chat Examples</h2>
+        <div class="chat-section">
+            <h3>Chat 1</h3>
+
+            <div class="message user-message" data-role="user-message">
+                <span class="message-label">User:</span>
+                <p>i want to create a website with a key to switch between dark mode and light mode make all file (HTML + CSS + JS) use YSFOML from https://github.com/professor-YasirSultan/YSFOML create a single YSFOML document to create all this file</p>
+            </div>
+
+            <div class="message ai-message" data-role="ai-message">
+                <span class="message-label">AI:</span>
+                <div class="ysfoml-code-block" data-type="ysfoml-code">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
+action:create;
+filename:index.html
+&lt;/YSFOML&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Dark/Light Mode Toggle&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body class="light-mode"&gt;
+    &lt;div class="container"&gt;
+        &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+        &lt;p&gt;This is a simple example demonstrating dark and light mode toggling.&lt;/p&gt;
+        &lt;button id="modeToggle"&gt;Toggle Mode&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;YSFOML&gt;
+action:create;
+filename:style.css
+&lt;/YSFOML&gt;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light Mode Styles */
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* White background for container in light mode */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+body.dark-mode .container {
+    background-color: #555; /* Darker background for container in dark mode */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 25px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light-mode button {
+    background-color: #007bff;
+    color: white;
+}
+
+body.light-mode button:hover {
+    background-color: #0056b3;
+}
+
+body.dark-mode button {
+    background-color: #28a745;
+    color: white;
+}
+
+body.dark-mode button:hover {
+    background-color: #218838;
+}
+&lt;YSFOML&gt;
+action:create;
+filename:script.js
+&lt;/YSFOML&gt;
+document.addEventListener('DOMContentLoaded', () =&gt; {
+    const modeToggle = document.getElementById('modeToggle');
+    const body = document.body;
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        body.className = savedTheme;
+    } else {
+        // Default to light mode if no preference is saved
+        body.className = 'light-mode';
+    }
+
+    modeToggle.addEventListener('click', () =&gt; {
+        if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            localStorage.setItem('theme', 'light-mode');
+        }
+    });
+});</code></pre>
+                </div>
+            </div>
+
+            <div class="message user-message" data-role="user-message">
+                <span class="message-label">User:</span>
+                <p>give me YSFOML code to make sure all files are made correctly (just make sure of files tree)</p>
+            </div>
+
+            <div class="message ai-message" data-role="ai-message">
+                <span class="message-label">AI:</span>
+                <div class="ysfoml-code-block" data-type="ysfoml-code">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
+action:treeFiles;
+foldername:
+&lt;/YSFOML&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="message user-message" data-role="user-message">
+                <span class="message-label">User:</span>
+                <pre><code>--- File Tree for '' ---
+website2/
+    index.html
+    script.js
+    style.css
+    logs/
+        input_2025-06-28_11-51-39.txt
+        input_2025-06-28_18-12-21.txt
+        processing_log_2025-06-28_11-51-39.txt
+        results_log_2025-06-28_11-51-39.txt
+--- End File Tree ---</code></pre>
+            </div>
+
+            <div class="message ai-message" data-role="ai-message">
+                <span class="message-label">AI:</span>
+                <p>This output confirms that index.html, script.js, and style.css were successfully created directly within the website2/ folder, as intended. The logs/ subdirectory and its contents are also present, which is normal for the YSFOML parser.</p>
+                <p>So, yes, the files were made correctly according to the file tree.</p>
+            </div>
+        </div>
+
+        <div class="chat-section">
+            <h3>Chat 2</h3>
+
+            <div class="message user-message" data-role="user-message">
+                <span class="message-label">User:</span>
+                <p>i'm experienced developer, but i'm new to laravel. and i have laravel project that i need to develop. i want to know all MVC and routes files/classes in the project. give me YSFOML code that list only MVC and routes files/classes. YSFOML are specifications are here: https://github.com/professor-YasirSultan/YSFOML</p>
+            </div>
+
+            <div class="message ai-message" data-role="ai-message">
+                <span class="message-label">AI:</span>
+                <div class="ysfoml-code-block" data-type="ysfoml-code">
+                    <span class="ysfoml-code-label">YSFOML</span>
+                    <pre><code>&lt;YSFOML&gt;
+action:treeFilesJSON;
+foldername:app/Models;
+&lt;/YSFOML&gt;
+
+&lt;YSFOML&gt;
+action:treeFilesJSON;
+foldername:app/Http/Controllers;
+&lt;/YSFOML&gt;
+
+&lt;YSFOML&gt;
+action:treeFilesJSON;
+foldername:resources/views;
+&lt;/YSFOML&gt;
+
+&lt;YSFOML&gt;
+action:treeFilesJSON;
+foldername:routes;
+&lt;/YSFOML&gt;</code></pre>
+                </div>
+            </div>
+
+            <div class="message user-message" data-role="user-message">
+                <span class="message-label">User:</span>
+                <p>// user send the result</p>
+            </div>
+
+            <div class="message ai-message" data-role="ai-message">
+                <span class="message-label">AI:</span>
+                <p>Here's an explanation of each section .....</p>
+            </div>
+
+            <div class="message user-message" data-role="user-message">
+                <span class="message-label">User:</span>
+                <p>i want you to explain the content of YSController.php (you may use YSFOML codes)</p>
+            </div>
+
+            <div class="message ai-message" data-role="ai-message">
+                <span class="message-label">AI:</span>
+                <p>Explanation of YSController.php ....</p>
+            </div>
+        </div>
+
+        <h2>10. Using the YSFOML Parser Application</h2>
+        <p>The provided Python script <code>YSFOML_GUI</code> acts as a parser and executor for YSFOML documents.</p>
+
+        <h3>10.1 Requirements</h3>
+        <ul>
+            <li>Python 3.x</li>
+            <li><code>tkinter</code> (usually included with Python)</li>
+            <li><code>requests</code> library (<code>pip install requests</code>)</li>
+            <li>For <code>action:json</code> with <code>jsonPath</code>, a JSONPath library might be required (e.g., <code>pip install jsonpath-ng</code>).</li>
+        </ul>
+
+        <h3>10.2 Running the Application</h3>
+        <ol>
+            <li>Save the provided Python code as a <code>.py</code> file (e.g., <code>ysfoml_parser.py</code>).</li>
+            <li>Run it from your terminal: <code>python ysfoml_parser.py</code></li>
+        </ol>
+
+        <h3>10.3 Application Interface</h3>
+        <p>The GUI provides the following main components:</p>
+        <ul>
+            <li><strong>YSFOML Input:</strong> A text area where you paste or type your YSFOML document.</li>
+            <li><strong>Project Folder:</strong> An entry field and a "Browse" button to select the base directory where all file operations will be performed. By default, it creates an <code>YSFOML_output</code> folder in the current working directory.</li>
+            <li><strong>Process YSFOML Button: Initiates the parsing and execution of the YSFOML content.</strong></li><strong>
+            <li><strong>Processing Logs:</strong> Displays detailed logs of each step, including warnings, errors, and success messages for file operations.</li>
+            <li><strong>Operation Results:</strong> Displays the output of query-based operations like <code>treeFolders</code>, <code>findFile</code>, <code>readFileAll</code>, etc.</li>
+            <li><strong>Security Level Dropdown:</strong> Allows the user to select a security level (low, medium, high, extremelyHigh) that will restrict which YSFOML actions can be executed.</li>
+        </strong></ul><strong>
+
+        <h3>10.4 Workflow</h3>
+        <ol>
+            <li><strong>Prepare YSFOML:</strong> Write or paste your YSFOML instructions into the "YSFOML Input" text area.</li>
+            <li><strong>Select Base Folder:</strong> Choose or confirm the "Project Folder" where the operations will take place.</li>
+            <li><strong>Select Security Level:</strong> Choose the appropriate security level from the dropdown. Operations requiring a higher security level than selected will be blocked.</li>
+            <li><strong>Process:</strong> Click "Process YSFOML".</li>
+            <li><strong>Review Output:</strong> Check the "Processing Logs" for the status of each operation and the "Operation Results" for the output of query actions.</li>
+            <li><strong>Check File System:</strong> Verify the changes in your chosen "Project Folder".</li>
+        </ol>
+
+        <h3>10.5 Logging</h3>
+        <p>The parser automatically saves three log files for each processing run within a <code>logs</code> subfolder inside your chosen project folder:</p>
+        <ul>
+            <li><code>input_[timestamp].txt</code>: A copy of the YSFOML content that was processed.</li>
+            <li><code>processing_log_[timestamp].txt</code>: The full content of the "Processing Logs" panel.</li>
+            <li><code>results_log_[timestamp].txt</code>: The full content of the "Operation Results" panel.</li>
+        </ul>
+
+        <h2>11. Error Handling and Best Practices</h2>
+
+        <h3>11.1 Error Handling</h3>
+        <ul>
+            <li>The parser attempts to log descriptive error messages to the "Processing Logs" panel for failed operations (e.g., file not found, permission errors, invalid parameters).</li>
+            <li>Syntax errors within the <code>key:value;</code> pairs might lead to parameters not being correctly parsed, resulting in "Warning: No 'key' found" messages.</li>
+            <li>Missing closing <code>&lt;/YSFOML&gt;</code> tags will result in warnings and incomplete parsing.</li>
+            <li>For critical errors (e.g., missing Python libraries), a <code>tkinter.messagebox</code> will appear.</li>
+            <li>Operations that fail due to insufficient security levels will be logged and prevented from executing.</li>
+        </ul>
+
+        <h3>11.2 Backup Mechanism</h3>
+        <ul>
+            <li>For <code>create</code>, <code>append</code>, <code>replaceInFile</code>, and <code>action:json</code> (write mode) operations, the parser creates a timestamped backup of the original file before modification. This is a crucial safety feature to prevent accidental data loss. Backups are stored in the same directory as the original file.</li>
+        </ul>
+
+        <h3>11.3 Best Practices</h3>
+        <ul>
+            <li><strong>Test on Dummy Data:</strong> Always test your YSFOML scripts on a non-critical "Project Folder" or with dummy files first, especially for destructive operations like <code>delete</code> or <code>deleteFolder</code>.</li>
+            <li><strong>Clear Paths:</strong> Use clear and consistent relative paths for filenames and foldernames.</li>
+            <li><strong>Review Logs:</strong> Always review the "Processing Logs" after execution to ensure all operations completed as expected and to identify any warnings or errors.</li>
+            <li><strong>One Action Per Block:</strong> Adhere to the "one action per YSFOML block" principle for clarity and proper parsing.</li>
+            <li><strong>Semicolons:</strong> Remember to end each parameter definition with a semicolon.</li>
+            <li><strong>Content Placement:</strong> Ensure the content associated with an action immediately follows its <code>&lt;/YSFOML&gt;</code> tag.</li>
+        </ul>
+
+        <h2>12. Limitations</h2>
+        <ul>
+            <li><strong>No Conditional Logic:</strong> YSFOML currently does not support conditional statements (if/else) or loops. Operations are executed sequentially as they appear in the document.</li>
+            <li><strong>No Variables:</strong> There is no support for defining and using variables within YSFOML.</li>
+            <li><strong>No External Scripting:</strong> YSFOML cannot directly execute external scripts or commands.</li>
+            <li><strong>Single File Processing:</strong> The parser processes the entire input as a single YSFOML document.</li>
+            <li><strong>Platform Dependent Paths:</strong> While <code>os.path.join</code> is used for path construction, complex path manipulations or platform-specific characters might behave unexpectedly.</li>
+            <li><strong>No Undo Feature:</strong> Operations are permanent on the file system (except for the automatic backups for certain actions). There is no built-in "undo" functionality for the sequence of operations.</li>
+        </ul>
+
+        <h2>13. Disclaimer</h2>
+        <p>YSFOML (Yasir Sultan File Operations Markup Language) and the YSFOML Processor application are currently under development. They are provided "as is" without warranty of any kind, either express or implied. Use at your own risk. The developer is not responsible for any data loss or other damages incurred from the use of this software.</p>
+    </strong></strong></strong></strong></strong></strong></strong></strong></div><strong><strong>
+
+
+</strong></strong></body></html>
