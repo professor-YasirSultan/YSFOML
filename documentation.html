@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YSFOML (Yasir Sultan File Operations Markup Language) Specification Version 1.0.0</title>
+    <style>
+        /* Dark Theme Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #222222;
+            color: #EEEEEE;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #2D2D2D;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 20px 0; /* Add some vertical margin */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #87CEEB; /* Sky Blue for headings */
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            border-bottom: 2px solid #87CEEB;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2em;
+            border-bottom: 1px solid #87CEEB;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #ADD8E6; /* Light Blue */
+        }
+
+        a {
+            color: #ADD8E6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: #3A3A3A;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #FFD700; /* Gold for inline code */
+        }
+
+        pre {
+            background-color: #1E1E1E;
+            color: #D4D4D4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1em;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            color: inherit;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        ol {
+            list-style-type: decimal;
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+
+        th, td {
+            border: 1px solid #555555;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3A3A3A;
+            color: #ADD8E6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px 0;
+            }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.7em; }
+            h3 { font-size: 1.3em; }
+            body {
+                align-items: flex-start; /* Reset align-items for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YSFOML (Yasir Sultan File Operations Markup Language) Specification and Documentation , Version 1.0.0</h1>
+
+        <h2>1. Introduction</h2>
+        <p>YSFOML (Yasir Sultan File Operations Markup Language) is a simple, human-readable markup language designed for defining and executing a series of file system operations. It allows users to specify actions such as creating, appending, deleting, renaming, moving files and folders, as well as performing content-based operations like searching, replacing, and reading file contents. YSFOML is processed by a dedicated parser application that interprets the defined actions and executes them on the local file system.</p>
+        <p>YSFOML is free to use, and you are encouraged to create applications that utilize it. When doing so, please ensure that "YSFOML (Yasir Sultan File Operations Markup Language)" is mentioned without alteration.</p>
+
+        <h2>2. Core Concepts</h2>
+
+        <h3>2.1 YSFOML Block Structure</h3>
+        <p>YSFOML operations are defined within <code>&lt;YSFOML&gt;</code> and <code>&lt;/YSFOML&gt;</code> tags. Each block represents a single file system operation.</p>
+        <p><strong>Syntax:</strong></p>
+        <pre><code>&lt;YSFOML&gt;
+action: [action_name];
+[parameter1]:[value1];
+[parameter2]:[value2]
+...
+&lt;/YSFOML&gt;
+[Optional Content associated with the action]</code></pre>
+        <ul>
+            <li><strong><code>&lt;YSFOML&gt;</code> and <code>&lt;/YSFOML&gt;</code>:</strong> These tags delimit an YSFOML instruction block.</li>
+            <li><strong>Instructions:</strong> Inside the tags, instructions are provided as <code>key:value;</code> pairs, with each instruction typically ending with a semicolon. The <code>action</code> key is mandatory and specifies the operation to be performed.</li>
+            <li><strong>Content:</strong> The text immediately following the <code>&lt;/YSFOML&gt;</code> closing tag (until the next <code>&lt;YSFOML&gt;</code> tag or end of document) is considered the "content" associated with that specific YSFOML block. This content is used by certain actions (e.g., <code>create</code>, <code>append</code>, <code>insertAt</code>).</li>
+        </ul>
+
+        <h3>2.2 Parameters</h3>
+        <p>Parameters are key-value pairs within the YSFOML block that provide specific details for the action.</p>
+        <p><strong>General Syntax:</strong> <code>parameter_name:parameter_value;</code></p>
+        <ul>
+            <li><strong><code>parameter_name</code></strong>: The name of the parameter (e.g., <code>filename</code>, <code>foldername</code>, <code>searchString</code>).</li>
+            <li><strong><code>parameter_value</code></strong>: The value for the parameter. This can be a file path, folder name, string, URL, line number, column number, etc.</li>
+            <li><strong>Semicolon (<code>;</code>)</strong>: Each parameter definition should end with a semicolon.</li>
+        </ul>
+
+        <h3>2.3 Base Folder</h3>
+        <p>All file system operations performed by the YSFOML parser are relative to a designated "base folder" (referred to as <code>project_folder_name</code> in the provided Python parser). If a file or folder path is specified without a leading slash (e.g., <code>file1.txt</code>, <code>my_new_folder/nested_file.txt</code>), it is assumed to be relative to this base folder.</p>
+
+        <h3>2.4 Security Levels</h3>
+        <p>YSFOML operations are categorized by security levels to indicate the potential impact on the file system. The YSFOML parser application may use these levels to enforce permissions or require higher user confirmation for more impactful operations.</p>
+        <ul>
+            <li><code>low</code>: Read-only operations that inspect the file system without making changes (e.g., listing files, searching content).</li>
+            <li><code>medium</code>: Operations that create, modify, or move files/folders without permanent deletion (e.g., creating files, appending content, renaming). These operations often include backup mechanisms.</li>
+            <li><code>high</code>: Operations that permanently delete files or folders. These are considered highly destructive and irreversible.</li>
+            <li><code>extremelyHigh</code>: (Future/Reserved) Operations that could involve arbitrary code execution or significant system-wide changes. Currently, no YSFOML actions support this level, and external scripting is explicitly not supported.</li>
+        </ul>
+
+        <h3>2.5 User-Defined Actions (<code>actionSource: userAdded</code>)</h3>
+        <p>While YSFOML provides a comprehensive set of built-in actions, future versions may allow for the definition of new, custom actions. If you are defining a new action that is not part of the standard YSFOML specification, you *must* include the <code>actionSource: userAdded;</code> parameter within the YSFOML block. This parameter signals to the parser that the action is a custom, user-defined one. Current YSFOML processors may log these actions as unsupported, but this mechanism is in place for future extensibility.</p>
+        <p><strong>Example for a hypothetical user-added action:</strong></p>
+        <pre><code>&lt;YSFOML&gt;
+action:myCustomAction;
+actionSource:userAdded;
+param1:value1;
+param2:value2
+&lt;/YSFOML&gt;
+This is content for my custom action.</code></pre>
+
+        <h2>3. Language Specification (Detailed Action Reference)</h2>
+        <p>This section details each supported YSFOML action, its purpose, parameters, content usage, and behavior.</p>
+
+        <h3>3.1 <code>action:create</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Creates a new file or overwrites an existing one with the provided content.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to create, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> The text content to write into the file.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>If the file already exists, it will be backed up (renamed with a timestamp) before being overwritten.</li>
+                    <li>Automatically creates parent directories if they do not exist.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:create;
+filename:file1.txt
+&lt;/YSFOML&gt;
+hey,
+this is the first file1
+by Yasir Sultan</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.2 <code>action:append</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Appends content to an existing file. If the file does not exist, it will be created.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to append to, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> The text content to append to the file.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>If the file already exists, a copy of the original file (with a timestamp) is created as a backup before appending.</li>
+                    <li>Automatically creates parent directories if they do not exist.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:append;
+filename:file2.txt
+&lt;/YSFOML&gt;
+
+
+hey,
+this is the second file
+developed by Yasir Sultan
+-- Appended content --</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.3 <code>action:delete</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Deletes a specified file.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to delete, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>high</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Logs an error if the file does not exist or if it's a directory.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:delete;
+filename:renamed_file1.txt
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.4 <code>action:createFolder</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Creates a new directory (folder).</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>foldername</code>: (Required, String) The path and name of the folder to create, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Creates all necessary parent directories.</li>
+                    <li>If the folder already exists, no action is taken, and it's noted as already existing.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:createFolder;
+foldername:my_new_folder
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.5 <code>action:deleteFolder</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Deletes a specified directory and all its contents (files and subfolders).</li>
+            <li><strong>Parameters:</b>
+                <ul>
+                    <li><code>foldername</code>: (Required, String) The path and name of the folder to delete, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>high</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Logs an error if the folder does not exist or if it's a file.</li>
+                    <li>This operation is recursive and irreversible.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:deleteFolder;
+foldername:my_new_folder
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.6 <code>action:rename</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Renames a file.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The current path and name of the file to rename, relative to the base folder.</li>
+                    <li><code>filename2</code>: (Required, String) The new path and name for the file, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Logs an error if the original file does not exist.</li>
+                    <li>Logs an error if the new filename already exists.</li>
+                    <li>This action only renames within the same directory; for moving to a different directory, use <code>action:move</code>.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:rename;
+filename:file1.txt;
+filename2:renamed_file1.txt
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.7 <code>action:move</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Moves a file from one location to another.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filepath1</code>: (Required, String) The current path and name of the file to move, relative to the base folder.</li>
+                    <li><code>filepath2</code>: (Required, String) The destination path and new name for the file, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Logs an error if the source file does not exist.</li>
+                    <li>Automatically creates the destination directory if it does not exist.</li>
+                    <li>If the destination file already exists, it will be overwritten.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:move;
+filepath1:file2.txt;
+filepath2:my_new_folder/moved_file2.txt
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.8 <code>action:treeFolders</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Displays the directory structure (folders only) starting from a specified folder.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>foldername</code>: (Optional, String) The folder from which to start the tree display, relative to the base folder. If omitted, the base folder itself is used.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs the folder tree to the "Operation Results" panel.</li>
+                    <li>Does not list individual files.</li>
+                </ul>
+            </li>
+            <li><strong>Example::</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:treeFolders;
+foldername:my_new_folder
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.9 <code>action:treeFiles</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Displays the full directory and file structure starting from a specified folder.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>foldername</code>: (Optional, String) The folder from which to start the tree display, relative to the base folder. If omitted, the base folder itself is used.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs the full file and folder tree to the "Operation Results" panel.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:treeFiles;
+foldername:
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.10 <code>action:findFile</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Searches for a specific file by name within a given folder and its subfolders.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The name of the file to search for.</li>
+                    <li><code>foldername</code>: (Optional, String) The folder to start the search from, relative to the base folder. If omitted, the base folder itself is used.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs the full paths of all found instances of the file to the "Operation Results" panel.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:findFile;
+filename:renamed_file1.txt;
+foldername:
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.11 <code>action:findInFile</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Searches for occurrences of a specific string within a file.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to search within, relative to the base folder.</li>
+                    <li><code>searchString</code>: (Required, String) The string to search for.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs the line number and column number for each occurrence of the <code>searchString</code> to the "Operation Results" panel.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:findInFile;
+filename:daily_report.txt;
+searchString:sales
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.12 <code>action:replaceInFile</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Replaces all occurrences of a <code>searchString</code> with a <code>newString</code> within a specified file.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to modify, relative to the base folder.</li>
+                    <li><code>searchString</code>: (Required, String) The string to find and replace.</li>
+                    <li><code>newString</code>: (Required, String) The string to replace <code>searchString</code> with. Can be an empty string to delete occurrences.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>A copy of the original file (with a timestamp) is created as a backup before modification.</li>
+                    <li>If <code>searchString</code> is not found, no changes are made to the file, and a message is logged.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:replaceInFile;
+filename:daily_report.txt;
+searchString:$;
+newString:USD
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.13 <code>action:readFileAll</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Reads and displays the entire content of a specified file.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to read, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs the full content of the file to the "Operation Results" panel.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:readFileAll;
+filename:daily_report.txt
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.14 <code>action:readFileLines</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Reads and displays specific lines from a file.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to read, relative to the base folder.</li>
+                    <li><code>startLine</code>: (Optional, Integer) The starting line number (1-indexed). Defaults to 1.</li>
+                    <li><code>endLine</code>: (Optional, Integer) The ending line number (1-indexed). Defaults to the last line of the file if omitted or set to -1.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs the specified range of lines to the "Operation Results" panel, prefixed with their line numbers.</li>
+                    <li>If <code>startLine</code> is out of bounds, an error is logged.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:readFileLines;
+filename:daily_report.txt;
+startLine:2;
+endLine:3
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.15 <code>action:insertAt</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Inserts text content at a specific line and column within a file.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>filename</code>: (Required, String) The path and name of the file to modify, relative to the base folder.</li>
+                    <li><code>lineNum</code>: (Required, Integer) The 1-indexed line number where the text should be inserted.</li>
+                    <li><code>colNum</code>: (Required, Integer) The 1-indexed column number within the specified line where the text should be inserted.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> The text content to insert into the file.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>A copy of the original file (with a timestamp) is created as a backup before modification.</li>
+                    <li>If <code>lineNum</code> is out of bounds, an error is logged.</li>
+                    <li>If <code>colNum</code> is greater than the length of the line, the text is appended to the end of that line.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:insertAt;
+filename:daily_report.txt;
+lineNum:1;
+colNum:1
+&lt;/YSFOML&gt;
+--- START OF REPORT ---</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.16 <code>action:downloadFile</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Downloads a file from a specified URL to a local location.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>url</code>: (Required, String) The URL of the file to download.</li>
+                    <li><code>localLocation</code>: (Required, String) The local path and filename where the downloaded file should be saved, relative to the base folder.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>medium</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Automatically creates parent directories for <code>localLocation</code> if they do not exist.</li>
+                    <li>Logs errors if the download fails (e.g., network issues, invalid URL, permission errors).</li>
+                    <li>Requires the <code>requests</code> Python library to be installed.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:downloadFile;
+url:https://raw.githubusercontent.com/openai/openai-python/main/README.md;
+localLocation:downloaded_readme.md
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.17 <code>action:treeFoldersJSON</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Generates a machine-readable JSON representation of the directory structure (folders only) starting from a specified folder. This action is primarily intended for AI models to programmatically understand the project's folder layout.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>foldername</code>: (Optional, String) The folder from which to start the tree generation, relative to the base folder. If omitted, the base folder itself is used.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs a JSON object representing the folder tree to the "Operation Results" panel.</li>
+                    <li>Each folder is represented with its name, type ("directory"), relative path, and a list of its contents (sub-folders).</li>
+                    <li>Does not list individual files.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:treeFoldersJSON;
+foldername:my_new_folder
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        <h3>3.18 <code>action:treeFilesJSON</code></h3>
+        <ul>
+            <li><strong>Purpose:</strong> Generates a machine-readable JSON representation of the full directory and file structure starting from a specified folder. This action is primarily intended for AI models to programmatically understand the complete project structure, including files.</li>
+            <li><strong>Parameters:</strong>
+                <ul>
+                    <li><code>foldername</code>: (Optional, String) The folder from which to start the tree generation, relative to the base folder. If omitted, the base folder itself is used.</li>
+                </ul>
+            </li>
+            <li><strong>Security Level:</strong> <code>low</code></li>
+            <li><strong>Content:</strong> Not used.</li>
+            <li><strong>Behavior:</strong>
+                <ul>
+                    <li>Outputs a JSON object representing the full file and folder tree to the "Operation Results" panel.</li>
+                    <li>Each item (folder or file) is represented with its name, type ("directory" or "file"), and relative path. Folders also include a list of their contents.</li>
+                </ul>
+            </li>
+            <li><strong>Example:</strong>
+                <pre><code>&lt;YSFOML&gt;
+action:treeFilesJSON;
+foldername:
+&lt;/YSFOML&gt;</code></pre>
+            </li>
+        </ul>
+
+        
+        <h2>4. Using the YSFOML Parser Application</h2>
+        <p>The provided Python script <code>YSFOML_GUI</code> acts as a parser and executor for YSFOML documents.</p>
+
+        <h3>4.1 Requirements</h3>
+        <ul>
+            <li>Python 3.x</li>
+            <li><code>tkinter</code> (usually included with Python)</li>
+            <li><code>requests</code> library (<code>pip install requests</code>)</li>
+            <li>For <code>action:json</code> with <code>jsonPath</code>, a JSONPath library might be required (e.g., <code>pip install jsonpath-ng</code>).</li>
+        </ul>
+
+        <h3>4.2 Running the Application</h3>
+        <ol>
+            <li>Save the provided Python code as a <code>.py</code> file (e.g., <code>ysfoml_parser.py</code>).</li>
+            <li>Run it from your terminal: <code>python ysfoml_parser.py</code></li>
+        </ol>
+
+        <h3>4.3 Application Interface</h3>
+        <p>The GUI provides the following main components:</p>
+        <ul>
+            <li><strong>YSFOML Input:</strong> A text area where you paste or type your YSFOML document.</li>
+            <li><strong>Project Folder:</strong> An entry field and a "Browse" button to select the base directory where all file operations will be performed. By default, it creates an <code>YSFOML_output</code> folder in the current working directory.</li>
+            <li><strong>Process YSFOML Button:</strong> Initiates the parsing and execution of the YSFOML content.</li>
+            <li><strong>Processing Logs:</strong> Displays detailed logs of each step, including warnings, errors, and success messages for file operations.</li>
+            <li><strong>Operation Results:</strong> Displays the output of query-based operations like <code>treeFolders</code>, <code>findFile</code>, <code>readFileAll</code>, etc.</li>
+            <li><strong>Security Level Dropdown:</strong> Allows the user to select a security level (low, medium, high, extremelyHigh) that will restrict which YSFOML actions can be executed.</li>
+        </ul>
+
+        <h3>4.4 Workflow</h3>
+        <ol>
+            <li><strong>Prepare YSFOML:</strong> Write or paste your YSFOML instructions into the "YSFOML Input" text area.</li>
+            <li><strong>Select Base Folder:</strong> Choose or confirm the "Project Folder" where the operations will take place.</li>
+            <li><strong>Select Security Level:</strong> Choose the appropriate security level from the dropdown. Operations requiring a higher security level than selected will be blocked.</li>
+            <li><strong>Process:</strong> Click "Process YSFOML".</li>
+            <li><strong>Review Output:</strong> Check the "Processing Logs" for the status of each operation and the "Operation Results" for the output of query actions.</li>
+            <li><strong>Check File System:</strong> Verify the changes in your chosen "Project Folder".</li>
+        </ol>
+
+        <h3>4.5 Logging</h3>
+        <p>The parser automatically saves three log files for each processing run within a <code>logs</code> subfolder inside your chosen project folder:</p>
+        <ul>
+            <li><code>input_[timestamp].txt</code>: A copy of the YSFOML content that was processed.</li>
+            <li><code>processing_log_[timestamp].txt</code>: The full content of the "Processing Logs" panel.</li>
+            <li><code>results_log_[timestamp].txt</code>: The full content of the "Operation Results" panel.</li>
+        </ul>
+
+        <h2>5. Error Handling and Best Practices</h2>
+
+        <h3>5.1 Error Handling</h3>
+        <ul>
+            <li>The parser attempts to log descriptive error messages to the "Processing Logs" panel for failed operations (e.g., file not found, permission errors, invalid parameters).</li>
+            <li>Syntax errors within the <code>key:value;</code> pairs might lead to parameters not being correctly parsed, resulting in "Warning: No 'key' found" messages.</li>
+            <li>Missing closing <code>&lt;/YSFOML&gt;</code> tags will result in warnings and incomplete parsing.</li>
+            <li>For critical errors (e.g., missing Python libraries), a <code>tkinter.messagebox</code> will appear.</li>
+            <li>Operations that fail due to insufficient security levels will be logged and prevented from executing.</li>
+        </ul>
+
+        <h3>5.2 Backup Mechanism</h3>
+        <ul>
+            <li>For <code>create</code>, <code>append</code>, <code>replaceInFile</code>, and <code>action:json</code> (write mode) operations, the parser creates a timestamped backup of the original file before modification. This is a crucial safety feature to prevent accidental data loss. Backups are stored in the same directory as the original file.</li>
+        </ul>
+
+        <h3>5.3 Best Practices</h3>
+        <ul>
+            <li><strong>Test on Dummy Data:</strong> Always test your YSFOML scripts on a non-critical "Project Folder" or with dummy files first, especially for destructive operations like <code>delete</code> or <code>deleteFolder</code>.</li>
+            <li><strong>Clear Paths:</strong> Use clear and consistent relative paths for filenames and foldernames.</li>
+            <li><strong>Review Logs:</strong> Always review the "Processing Logs" after execution to ensure all operations completed as expected and to identify any warnings or errors.</li>
+            <li><strong>One Action Per Block:</strong> Adhere to the "one action per YSFOML block" principle for clarity and proper parsing.</li>
+            <li><strong>Semicolons:</strong> Remember to end each parameter definition with a semicolon.</li>
+            <li><strong>Content Placement:</strong> Ensure the content associated with an action immediately follows its <code>&lt;/YSFOML&gt;</code> tag.</li>
+        </ul>
+
+        <h2>6. Limitations</h2>
+        <ul>
+            <li><strong>No Conditional Logic:</strong> YSFOML currently does not support conditional statements (if/else) or loops. Operations are executed sequentially as they appear in the document.</li>
+            <li><strong>No Variables:</strong> There is no support for defining and using variables within YSFOML.</li>
+            <li><strong>No External Scripting:</strong> YSFOML cannot directly execute external scripts or commands.</li>
+            <li><strong>Single File Processing:</strong> The parser processes the entire input as a single YSFOML document.</li>
+            <li><strong>Platform Dependent Paths:</strong> While <code>os.path.join</code> is used for path construction, complex path manipulations or platform-specific characters might behave unexpectedly.</li>
+            <li><strong>No Undo Feature:</strong> Operations are permanent on the file system (except for the automatic backups for certain actions). There is no built-in "undo" functionality for the sequence of operations.</li>
+        </ul>
+
+        <h2>7. Disclaimer</h2>
+        <p>YSFOML (Yasir Sultan File Operations Markup Language) and the YSFOML Processor application are currently under development. They are provided "as is" without warranty of any kind, either express or implied. Use at your own risk. The developer is not responsible for any data loss or other damages incurred from the use of this software.</p>
+
+        <h2>8. YSFOML and Artificial Intelligence</h2>
+        <p>YSFOML is designed with Artificial Intelligence (AI) interaction in mind, serving as a structured and human-readable language for AI models to specify file system operations. This allows AI to communicate desired file manipulations in a clear, auditable format.</p>
+        <p>A core principle of YSFOML's design, especially when used with AI, is the "human-in-the-loop" security model. AI models can generate YSFOML instructions based on user requests (e.g., "Please create a Python script and save it as 'hello.py'"). However, the execution of these instructions is intentionally manual: the AI provides the YSFOML text, and the user must then copy and paste this text into the YSFOML Parser application. This manual step acts as a critical security layer, preventing direct, unsupervised AI access to your local file system.</p>
+        <p>By generating YSFOML instructions, AI can help users understand, create, and edit code, manage project files, or perform other file-related tasks. This approach empowers users with AI assistance while maintaining ultimate control and oversight over their file system.</p>
+        <p>It is crucial to understand that the execution of any YSFOML instructions, whether generated by an AI or written manually, is entirely at the user's own risk. Users are strongly advised to always review the generated YSFOML content carefully before processing it with the YSFOML Parser, especially for actions with <code>medium</code> or <code>high</code> security levels that can modify or delete files.</p>
+
+        <h3>8.1 AI Workflow for Project Understanding and Modification</h3>
+        <p>For an AI to effectively assist with file system operations, especially in complex projects, it's essential for the AI to first gain an understanding of the project's structure and existing content. The <code>action:treeFoldersJSON</code> and <code>action:treeFilesJSON</code> actions are specifically designed for this purpose.</p>
+        <ul>
+            <li><strong>Initial Project Overview:</strong> An AI should begin by requesting a JSON representation of the project's folder or file tree using <code>action:treeFoldersJSON</code> (for a high-level folder structure) or <code>action:treeFilesJSON</code> (for a detailed view including all files). This provides the AI with a structured, machine-readable map of the project.</li>
+            <li><strong>Content Analysis:</strong> Once the AI has the project structure, it can then identify relevant files (e.g., source code, configuration files, data files). For specific files, the AI can then use <code>action:readFileAll</code> or <code>action:readFileLines</code> to read their content and understand their purpose or identify areas for modification.</li>
+            <li><strong>Generating Modification Instructions:</strong> With a clear understanding of the project structure and file contents, the AI can then generate precise YSFOML instructions for operations like <code>action:create</code>, <code>action:append</code>, <code>action:replaceInFile</code>, or <code>action:insertAt</code> to make the desired changes. This iterative process of "read-then-write" ensures that AI-generated modifications are contextually aware and accurate.</li>
+        </ul>
+        <p>This structured approach allows the AI to provide more intelligent and targeted assistance, while the human-in-the-loop model ensures safety and oversight.</p>
+    </div>
+</body>
+</html>
