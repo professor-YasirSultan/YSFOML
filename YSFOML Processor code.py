@@ -1,4 +1,4 @@
-# YSFOML (Yasir Sultan File Operations Markup Language) Processor , Version 1.0.3 
+# YSFOML (Yasir Sultan File Operations Markup Language) Processor , Version 1.0.4
 
 import os
 import datetime
