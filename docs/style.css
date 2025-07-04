@@ -1,0 +1,547 @@
+/* General Body Styling (from 60b.html, adjusted for dark theme) */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  /* Adjusted for container margin */
+  background-color: #222222;
+  /* Dark background */
+  color: #eeeeee;
+  /* Light text */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Main Container for the Page (combined from both) */
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: 20px auto;
+  /* Adjusted for vertical margin */
+  background: #2d2d2d;
+  /* Darker background for container */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  /* Adjusted shadow for dark theme */
+  box-sizing: border-box;
+  /* Ensure padding is included in width */
+}
+
+/* Headings (combined from both) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #87ceeb;
+  /* Sky Blue for headings */
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.5em;
+  border-bottom: 2px solid #87ceeb;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  /* From 60b.html */
+}
+
+h2 {
+  font-size: 2em;
+  border-bottom: 1px solid #87ceeb;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+  /* From 60b.html */
+}
+
+h3 {
+  font-size: 1.5em;
+  color: #add8e6;
+  /* Light Blue */
+  text-align: left;
+  /* From 60b.html */
+  margin-top: 40px;
+  /* From 60b.html */
+  margin-bottom: 15px;
+  /* From 60b.html */
+}
+
+/* Styling for general content sections (from 60b.html) */
+.content-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #555555;
+  /* Adjusted for dark theme */
+  border-radius: 8px;
+  background-color: #3a3a3a;
+  /* Adjusted for dark theme */
+}
+
+.content-section p {
+  margin-bottom: 10px;
+}
+
+.content-section ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.content-section li {
+  margin-bottom: 5px;
+}
+
+/* Styling for each Chat Section (from 60b.html) */
+.chat-section {
+  margin-bottom: 40px;
+  border: 1px solid #555555;
+  /* Adjusted for dark theme */
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #3a3a3a;
+  /* Adjusted for dark theme */
+}
+
+/* Styling for individual messages (from 60b.html) */
+.message {
+  margin-bottom: 15px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  word-wrap: break-word;
+  /* Ensures long words break and wrap */
+}
+
+/* User Message Specific Styling (from 60b.html) */
+.user-message {
+  background-color: #444444;
+  /* Darker grey */
+  border-left: 5px solid #add8e6;
+  /* Light blue border */
+  margin-right: 15%;
+  /* Indent from right */
+}
+
+/* AI Message Specific Styling (from 60b.html) */
+.ai-message {
+  background-color: #333333;
+  /* Even darker grey */
+  border-left: 5px solid #90ee90;
+  /* Light green border */
+  margin-left: 15%;
+  /* Indent from left */
+}
+
+/* Label for User/AI in messages (from 60b.html) */
+.message-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #eeeeee;
+  /* Adjusted for dark theme */
+}
+
+/* Styling for YSFOML Code Blocks (combined from both) */
+.ysfoml-code-block {
+  background-color: #1e1e1e;
+  /* Dark background for code */
+  color: #d4d4d4;
+  /* Light text for code */
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  /* Enable horizontal scrolling for long lines */
+  margin-top: 10px;
+  font-family: "Consolas", "Monaco", monospace;
+  /* From 60.html */
+  font-size: 0.9em;
+  position: relative;
+  /* For positioning the YSFOML label */
+}
+
+/* Label for YSFOML Code Blocks (from 60b.html) */
+.ysfoml-code-label {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: #87ceeb;
+  /* Sky Blue label background */
+  color: black;
+  /* Changed to black for contrast */
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.7em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Preformatted text within code blocks (combined from both) */
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  /* Ensures long lines wrap */
+  word-wrap: break-word;
+  /* Ensures long words break */
+}
+
+/* Code element within pre (from 60b.html) */
+pre code {
+  display: block;
+  /* Make code block fill pre */
+  background-color: transparent;
+  /* From 60.html */
+  padding: 0;
+  /* From 60.html */
+  border-radius: 0;
+  /* From 60.html */
+  color: inherit;
+  /* From 60.html */
+}
+
+/* General elements from 60.html */
+a {
+  color: #add8e6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  font-family: "Consolas", "Monaco", monospace;
+  background-color: #3a3a3a;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #ffd700;
+  /* Gold for inline code */
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+
+th,
+td {
+  border: 1px solid #555555;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #3a3a3a;
+  color: #add8e6;
+}
+
+/* Responsive adjustments for smaller screens (combined from both) */
+@media (max-width: 768px) {
+  .user-message,
+  .ai-message {
+    margin-left: 0;
+    /* Remove indentation */
+    margin-right: 0;
+    /* Remove indentation */
+  }
+
+  .container {
+    padding: 15px;
+    /* Reduce padding on container */
+    margin: 10px 0;
+    /* Adjusted vertical margin */
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.7em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  body {
+    align-items: flex-start;
+    /* Reset align-items for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+}
+
+/* Styles for YSFOML Document Visualization section */
+#ysfoml-visualization-wrapper {
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  padding: 20px;
+  /* Adjusted from original body padding to fit within container */
+  background-color: #f4f4f4;
+  /* Light grey background for the page (YSFOML Document) */
+  gap: 20px;
+  flex-wrap: wrap;
+  line-height: 1.5;
+  color: #333;
+  /* Dark text for this light section */
+  border-radius: 8px;
+  /* Match container border-radius */
+  margin-bottom: 40px;
+  /* Space after this section */
+}
+
+#ysfoml-visualization-wrapper h2 {
+  color: #333;
+  /* Dark color for heading in this section */
+  border-bottom: 1px solid #eee;
+  /* Light border for heading */
+  padding-bottom: 10px;
+  margin-top: 0;
+  text-align: left;
+  /* Override center alignment from main h2 */
+  width: 100%;
+  /* Ensure heading takes full width */
+}
+
+/* Container for the YSFOML visualization */
+#ysfoml-display-container {
+  flex: 3;
+  min-width: 300px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+/* Container for the color legend */
+#color-legend {
+  flex: 1;
+  min-width: 180px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+}
+
+/* Styling for the main YSFOML article container */
+.ysfoml-article {
+  background-color: #ffd8e6;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ffceeb;
+}
+
+/* Styling for the main YSFOML block container */
+.ysfoml-block {
+  background-color: #add8e6;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #87ceeb;
+}
+
+/* Styling for Associated Content */
+.ysfoml-associated-content {
+  background-color: #ffcc99;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 3px;
+  color: #333;
+}
+
+/* Styling for structural YSFOML elements like <YSFOML>, </YSFOML>, :, ; */
+.ysfoml-structural {
+  color: #666;
+  font-weight: bold;
+}
+
+/* Styling for lines containing structural elements (tags, semicolons) */
+.ysfoml-structural-line {
+  display: block;
+  color: #666;
+  font-weight: bold;
+}
+
+/* Styling for a key-value parameter line */
+.ysfoml-param-line {
+  display: block;
+  margin-bottom: 5px;
+  background-color: #e0f2f7;
+  padding: 5px;
+  border-radius: 3px;
+  margin-left: 20px;
+}
+
+/* Styling for YSFOML keys */
+.ysfoml-key {
+  background-color: #ffff99;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+  display: inline-block;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Styling for YSFOML values */
+.ysfoml-value {
+  background-color: #90ee90;
+  padding: 2px 5px;
+  border-radius: 3px;
+  display: inline-block;
+  color: #333;
+  word-break: break-all;
+}
+
+/* Styling for items in the color legend */
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Small colored box in the legend */
+.color-box {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Styling for the code snippets in the legend */
+.code-display {
+  font-size: 0.9em;
+  color: #555;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Table of Contents Styling */
+.table-of-contents {
+  background-color: #3a3a3a;
+  /* Slightly lighter than container */
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid #555555;
+}
+
+.table-of-contents h2 {
+  color: #87ceeb;
+  text-align: left;
+  margin-top: 0;
+  border-bottom: 1px solid #87ceeb;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.table-of-contents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.table-of-contents ul li {
+  margin-bottom: 8px;
+}
+
+.table-of-contents ul ul {
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.table-of-contents a {
+  color: #add8e6;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.table-of-contents a:hover {
+  text-decoration: underline;
+}
+
+/* Specific styling for TOC levels */
+.table-of-contents > ul > li > a {
+  font-weight: bold;
+  /* Make main sections bold */
+}
+
+/* Go to Top link styling */
+.go-to-top {
+  font-size: 0.8em;
+  margin-left: 10px;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #add8e6;
+  /* Light Blue, same as other links */
+  white-space: nowrap;
+  /* Prevent wrapping for the link itself */
+}
+
+.go-to-top:hover {
+  text-decoration: underline;
+}
+
+/* To position the go-to-top link next to the header */
+h2,
+h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Pushes link to the right */
+  flex-wrap: wrap;
+  /* Allows wrapping on smaller screens */
+  text-align: left;
+  /* Ensure H2, H3 are left-aligned with TOC */
+}
+
+h2 span,
+h3 span {
+  flex-grow: 1;
+  /* Allows text to take up available space */
+  text-align: inherit;
+  /* Maintain original text alignment */
+}
