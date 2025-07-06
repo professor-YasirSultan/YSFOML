@@ -3,14 +3,14 @@
 YSFOML (Yasir Sultan File Operations Markup Language) is a powerful and intuitive markup language designed to automate and simplify file system operations. It provides a structured, human-readable way to define a series of file-related tasks, bridging the gap between human intent and automated file management. [1]
 
 
-# Links
-## YSFOML HomePage (GitHub Pages):
-    https://professor-yasirsultan.github.io/YSFOML/
-## Professor Yasir Sultan's YouTube Channel:
+## Links
+### YSFOML HomePage (GitHub Pages):
+    [https://professor-yasirsultan.github.io/YSFOML/](https://professor-yasirsultan.github.io/YSFOML/)    
+### Professor Yasir Sultan's YouTube Channel:
     https://www.youtube.com/@prof.yasir.sultan?sub_confirmation=1
-## YSFOML YouTube playlist (Arabic and English):
+### YSFOML YouTube playlist (Arabic and English):
     https://www.youtube.com/playlist?list=PL-3wR8Xwb_8-7AEqldUesYo9lhI3biYKn
-## AI Bot Interaction Examples:
+### AI Bot Interaction Examples:
     https://poe.com/YSFOML_expert
 
 
